@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="UnloadCamera.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DeviceNames" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Canon EOS 700D\SD</Value>
+    </Setting>
+    <Setting Name="TargetDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\one\photo\Mes Photos</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

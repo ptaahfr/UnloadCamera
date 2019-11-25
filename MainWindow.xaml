@@ -18,6 +18,6 @@
             <Button Content="Minimize" Click="Minimize_Click" />
             <Button Content="Close" Click="Close_Click" />
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding LogEntries}" SelectedIndex="{Binding LogEntriesIndex, Mode=OneWay}"></ListBox>
+        <ListBox Grid.Row="1" ItemsSource="{Binding LogEntries}" SelectedIndex="{Binding LogEntriesLastIndex, Mode=OneWay}"></ListBox>
     </Grid>
 </Window>

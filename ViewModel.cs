@@ -3,19 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 
 namespace UnloadCamera
 {
@@ -28,7 +24,7 @@ namespace UnloadCamera
 
         public ObservableCollection<string> LogEntries { get; } = new ObservableCollection<string>();
 
-        public int LogEntriesIndex => LogEntries.Count - 1;
+        public int LogEntriesLastIndex => LogEntries.Count - 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,7 +43,7 @@ namespace UnloadCamera
                     LogEntries.RemoveAt(0);
                 }
                 TriggerPropertyChanged(nameof(LogEntries));
-                TriggerPropertyChanged(nameof(LogEntriesIndex));
+                TriggerPropertyChanged(nameof(LogEntriesLastIndex));
             }, null);
         }
 
@@ -110,11 +106,9 @@ namespace UnloadCamera
                                             string destPath;
                                             do
                                             {
-                                                destPath = Path.Combine(settings.TargetDirectory, $"{date.Year}", $"{date.Year} - {date.Month:00}", Path.GetFileName(file));
+                                                destPath = Path.Combine(settings.TargetDirectory, $"{date.Year}", $"{date.Year}{date.Month:00}", Path.GetFileName(file));
                                                 increment++;
                                             } while (dev.FileExists(destPath));
-
-                                            dev.CreateDirectory(Path.GetDirectoryName(destPath));
 
                                             using (var tempStream = new MemoryStream())
                                             {

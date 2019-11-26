@@ -97,11 +97,10 @@ namespace UnloadCamera
                                     {
                                         var rootDir = Path.Combine(subPath, "DCIM");
                                         var files = dev.GetFiles(rootDir, "*.*", SearchOption.AllDirectories);
-                                        var dates = files.Select(x => dev.GetFileInfo(x).LastWriteTime);
+
                                         foreach (var file in files)
                                         {
-                                            var fileInfo = dev.GetFileInfo(file);
-                                            var date = fileInfo.LastWriteTime ?? DateTime.Now;
+                                            var date = dev.GetFileInfo(file).LastWriteTime ?? DateTime.Now;
                                             int increment = 0;
                                             string destPath;
                                             do

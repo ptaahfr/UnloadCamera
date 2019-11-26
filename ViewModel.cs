@@ -108,24 +108,13 @@ namespace UnloadCamera
                                             {
                                                 destPath = Path.Combine(settings.TargetDirectory, $"{date.Year}", $"{date.Year}{date.Month:00}", Path.GetFileName(file));
                                                 increment++;
-                                            } while (dev.FileExists(destPath));
+                                            } while (File.Exists(destPath));
 
-                                            using (var tempStream = new MemoryStream())
+                                            Log($"Copying {file} to {destPath}");
+                                            Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+                                            using (var outputFile = File.OpenWrite(destPath))
                                             {
-                                                Log($"Copying {file} to {destPath}");
-                                                dev.DownloadFile(file, tempStream);
-                                                Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-                                                using (var outputFile = File.OpenWrite(destPath))
-                                                {
-                                                    tempStream.Seek(0, SeekOrigin.Begin);
-                                                    tempStream.CopyTo(outputFile);
-                                                }
-
-                                                if (new FileInfo(destPath).Length != tempStream.Length)
-                                                {
-                                                    Log($"Incomplete copying, skipping.");
-                                                    continue;
-                                                }
+                                                dev.DownloadFile(file, outputFile);
                                             }
 
                                             Log($"Deleting {file}");
